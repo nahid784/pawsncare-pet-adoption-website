@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Use for responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- link To CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- link To JS -->
+    <script src="index.js" defer></script>
+    <!-- For Scroll Reveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- For Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Link For Gsap -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- Link For Gsap - Scroll Trigger -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+      integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- Link For Lenis - Smooth Scrolling -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <!-- Link For Split Type -->
+    <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
+    <title>Login or Register</title>
+  </head>
+  <body>
+    <div class="auth">
+      <div class="button-box">
+        <div id="log"></div>
+        <button type="button" class="form-btn" onclick="login()">Login</button>
+        <button type="button" class="form-btn" onclick="register()">Register</button>
+      </div>
+      <div class="formsocial">
+        <a href="/"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="/"><i class="fa-brands fa-twitter"></i></a>
+        <a href="/"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+      <form id="login" action="auth.php" method="POST" class="input-group">
+        <input type="hidden" name="action" value="login" />
+        <input type="text" name="user_id" class="input-field" placeholder="User Id" required />
+        <input type="password" name="password" class="input-field" placeholder="User Password" required />
+        <input type="checkbox" class="check-box" /><span>Remember Password</span>
+        <button type="submit" class="sbmt-btn">Login</button>
+    </form>
+    <form id="register" action="auth.php" method="POST" class="input-group">
+        <input type="hidden" name="action" value="register" />
+        <input type="text" name="user_id" class="input-field" placeholder="User Id" required />
+        <input type="email" name="email" class="input-field" placeholder="Email" required />
+        <input type="password" name="password" class="input-field" placeholder="User Password" required />
+        <input type="checkbox" class="check-box" /><span>I Agree to the terms & Conditions</span>
+        <button type="submit" class="sbmt-btn">Register</button>
+    </form>
+
+    <script>
+      var x = document.getElementById("login");
+      var y = document.getElementById("register");
+      var z = document.getElementById("log");
+
+      function register() {
+        x.style.left = "-400px";
+        y.style.left = "50px";
+        z.style.left = "120px";
+      }
+
+      function login() {
+        x.style.left = "50px";
+        y.style.left = "450px";
+        z.style.left = "0px";
+      }
+
+      
+      
+    </script>
+  </body>
+</html>
