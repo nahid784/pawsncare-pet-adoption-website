@@ -138,27 +138,4 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", handleFormSubmit);
 });
 
-//user
 
-document.querySelectorAll("form").forEach((form) => {
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(form);
-    const response = await fetch(form.action, {
-      method: form.method,
-      body: formData,
-    });
-
-    const result = await response.json();
-
-    if (result.status === "success") {
-      alert(result.message); // Show success popup
-      if (form.id === "login") {
-        window.location.href = "index.php"; // Redirect to homepage on login success
-      }
-    } else {
-      alert(result.message); // Show error popup
-    }
-  });
-});

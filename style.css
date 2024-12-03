@@ -901,7 +901,7 @@ form input[type="submit"]:hover {
 /* auth */
 
 .auth{
-  height: 550px;
+  height: 620px;
   width: 380px;
   position: relative;
   margin: 6% auto;
@@ -991,6 +991,18 @@ form input[type="submit"]:hover {
   border-radius: 30px;
 }
 
+.sbmt-btn:hover{
+  width: 85%;
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  background: linear-gradient(to right, #ff6f91, #ffd056); 
+  border: 0;
+  outline: none;
+  border-radius: 30px;
+}
+
 .check-box{
   margin: 30px 10px 30px 0;
 }
@@ -1009,3 +1021,82 @@ span{
 #register{
   left: 450px;
 }
+
+.password-container {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.toggle-password i {
+  font-size: 1rem;
+  color: #aaa;
+}
+
+.toggle-password i:hover {
+  color: #333;
+}
+
+#password-match-message {
+  margin-top: 5px;
+  color: red;
+  font-size: 0.9rem;
+  display: none;
+}
+
+.sbmt-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  color: #666;
+}
+
+.home-btn {
+  display: block;
+  width: 50%; /* Reduced width */
+  padding: 10px;
+  margin: 20px auto 0; /* Center horizontally */
+  background: linear-gradient(to right, #ff105f, #ffad06); /* Gradient background */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative; /* Required for the hover pseudo-element */
+  overflow: hidden; /* Hide the pseudo-element overflow */
+  z-index: 1; /* Ensures content stays above the pseudo-element */
+  transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition for text color and background */
+}
+
+.home-btn::before {
+  content: 'Go to Home'; /* Text displayed during hover animation */
+  display: flex; /* Ensures content is centered */
+  justify-content: center;
+  align-items: center;
+  color: white; /* Text color inside the pseudo-element */
+  position: absolute;
+  top: 0;
+  left: -100%; /* Initially hidden */
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #ffad06, #ff105f); /* Reverse gradient */
+  z-index: 0; /* Behind the main button text */
+  transition: left 0.3s ease; /* Smooth sliding animation */
+}
+
+.home-btn:hover::before {
+  left: 0; /* Slide in the pseudo-element from the left */
+}
+
+.home-btn:hover {
+  color: #fff; /* Keep the main text white during hover */
+}
+
+
+

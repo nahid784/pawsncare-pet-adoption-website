@@ -1,90 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- Use for responsiveness -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- link To CSS -->
-    <link rel="stylesheet" href="style.css" />
-    <!-- link To JS -->
-    <script src="index.js" defer></script>
-    <!-- For Scroll Reveal -->
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <!-- For Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <!-- Link For Gsap -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <!-- Link For Gsap - Scroll Trigger -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-      integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <!-- Link For Lenis - Smooth Scrolling -->
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-    <!-- Link For Split Type -->
-    <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
-    <title>Login or Register</title>
-  </head>
-  <body>
-    <div class="auth">
-      <div class="button-box">
-        <div id="log"></div>
-        <button type="button" class="form-btn" onclick="login()">Login</button>
-        <button type="button" class="form-btn" onclick="register()">Register</button>
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- Use for responsiveness -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- link To CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- link To JS -->
+  <script src="index.js" defer></script>
+  <!-- For Scroll Reveal -->
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <!-- For Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Link For Gsap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Link For Gsap - Scroll Trigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+    integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Link For Lenis - Smooth Scrolling -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <!-- Link For Split Type -->
+  <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
+  <title>Login or Register</title>
+</head>
+
+<body>
+  <div class="auth">
+    <div class="button-box">
+      <div id="log"></div>
+      <button type="button" class="form-btn" onclick="login()">Login</button>
+      <button type="button" class="form-btn" onclick="register()">Register</button>
+    </div>
+
+    <form id="login" action="auth.php" method="POST" class="input-group">
+      <input type="hidden" name="action" value="login" />
+      <input type="text" name="user_id" class="input-field" placeholder="User Id" required />
+      <div class="password-container">
+        <input type="password" name="password" class="input-field" id="login-password" placeholder="User Password"
+          required />
+        <span class="toggle-password" onclick="togglePassword('login-password')">
+          <i class="fa fa-eye-slash"></i>
+        </span>
       </div>
-      <div class="formsocial">
-        <a href="/"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="/"><i class="fa-brands fa-twitter"></i></a>
-        <a href="/"><i class="fa-brands fa-linkedin-in"></i></a>
-      </div>
-      <form id="login" action="auth.php" method="POST" class="input-group">
-        <input type="hidden" name="action" value="login" />
-        <input type="text" name="user_id" class="input-field" placeholder="User Id" required />
-        <input type="password" name="password" class="input-field" placeholder="User Password" required />
-        <input type="checkbox" class="check-box" /><span>Remember Password</span>
-        <button type="submit" class="sbmt-btn">Login</button>
+      <input type="checkbox" class="check-box" name="remember" /><span>Remember Password</span>
+      <button type="submit" class="sbmt-btn">Login</button>
     </form>
+
+
     <form id="register" action="auth.php" method="POST" class="input-group">
-        <input type="hidden" name="action" value="register" />
-        <input type="text" name="user_id" class="input-field" placeholder="User Id" required />
-        <input type="email" name="email" class="input-field" placeholder="Email" required />
-        <input type="password" name="password" class="input-field" placeholder="User Password" required />
-        <input type="checkbox" class="check-box" /><span>I Agree to the terms & Conditions</span>
-        <button type="submit" class="sbmt-btn">Register</button>
+      <input type="hidden" name="action" value="register" />
+      <input type="text" name="user_id" class="input-field" placeholder="User Id" required />
+      <input type="email" name="email" class="input-field" placeholder="Email" required />
+
+      <!-- Password Field -->
+      <div class="password-container">
+        <input type="password" name="password" class="input-field" id="register-password" placeholder="User Password"
+          required />
+        <span class="toggle-password" onclick="togglePassword('register-password')">
+          <i class="fa fa-eye-slash"></i>
+        </span>
+      </div>
+
+      <!-- Confirm Password Field -->
+      <div class="password-container">
+        <input type="password" name="confirm_password" class="input-field" id="confirm-password"
+          placeholder="Confirm Password" required />
+        <span class="toggle-password" onclick="togglePassword('confirm-password')">
+          <i class="fa fa-eye-slash"></i>
+        </span>
+      </div>
+
+      <!-- Validation Message -->
+      <p id="password-match-message" style="color: red; font-size: 0.9rem; display: none;">Passwords do not match!</p>
+
+      <!-- Role Selection -->
+      <div class="role-container">
+        <select name="role" class="input-field" required>
+          <option value="" disabled selected>Select Role</option>
+          <option value="admin">Admin</option>
+          <option value="user">User</option>
+        </select>
+      </div>
+
+      <!-- Terms and Conditions -->
+      <input type="checkbox" id="terms-checkbox" class="check-box" onclick="toggleRegisterButton()" />
+      <span>I Agree to the terms & Conditions</span>
+
+      <!-- Register Button -->
+      <button type="submit" class="sbmt-btn" id="register-button" disabled
+        onclick="return validatePasswords()">Register</button>
     </form>
 
-    <script>
-      var x = document.getElementById("login");
-      var y = document.getElementById("register");
-      var z = document.getElementById("log");
 
-      function register() {
-        x.style.left = "-400px";
-        y.style.left = "50px";
-        z.style.left = "120px";
+    <!-- Home Button -->
+    <button type="button" class="home-btn" onclick="location.href='index.html'">Home</button>
+  </div>
+
+  <script>
+    var x = document.getElementById("login");
+    var y = document.getElementById("register");
+    var z = document.getElementById("log");
+
+    function register() {
+      x.style.left = "-400px";
+      y.style.left = "50px";
+      z.style.left = "120px";
+    }
+
+    function login() {
+      x.style.left = "50px";
+      y.style.left = "450px";
+      z.style.left = "0px";
+    }
+
+    // Toggle password visibility function
+    function togglePassword(passwordFieldId) {
+      const passwordField = document.getElementById(passwordFieldId);
+      const icon = passwordField.nextElementSibling.querySelector('i');
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+      } else {
+        passwordField.type = "password";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
       }
+    }
 
-      function login() {
-        x.style.left = "50px";
-        y.style.left = "450px";
-        z.style.left = "0px";
+    // Validate that passwords match
+    function validatePasswords() {
+      const password = document.getElementById("register-password").value;
+      const confirmPassword = document.getElementById("confirm-password").value;
+
+      const message = document.getElementById("password-match-message");
+      const submitButton = document.getElementById("register-button");
+
+      if (password !== confirmPassword) {
+        message.style.display = "block";
+        submitButton.disabled = true;
+        return false; // Prevent form submission if passwords do not match
+      } else {
+        message.style.display = "none";
+        submitButton.disabled = false;
+        return true; // Allow form submission if passwords match
       }
+    }
 
-      
-      
-    </script>
-  </body>
+    // Enable or disable register button based on checkbox and role selection
+    function toggleRegisterButton() {
+      const checkbox = document.getElementById("terms-checkbox");
+      const roleSelect = document.querySelector('select[name="role"]');
+      const submitButton = document.getElementById("register-button");
+
+      if (checkbox.checked && roleSelect.value) {
+        submitButton.disabled = false; // Enable register button if both terms are agreed and role is selected
+      } else {
+        submitButton.disabled = true; // Keep button disabled otherwise
+      }
+    }
+
+    // Check role selection and terms checkbox on page load
+    window.onload = function () {
+      toggleRegisterButton(); // Ensure button is properly enabled/disabled when the page loads
+    };
+    window.onload = function () {
+      // Prefill login fields if cookies exist
+      const userId = getCookie("user_id");
+      const password = getCookie("password");
+
+      if (userId && password) {
+        document.querySelector('input[name="user_id"]').value = userId;
+        document.querySelector('input[name="password"]').value = password;
+        document.querySelector('input[name="remember"]').checked = true;
+      }
+    };
+
+    // Function to get a cookie by name
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(";").shift();
+    }
+
+
+
+
+  </script>
+</body>
+
 </html>
