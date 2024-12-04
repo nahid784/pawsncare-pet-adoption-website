@@ -75,9 +75,14 @@ if ($action === "register") {
                 setcookie("role", $db_role, time() + (30 * 24 * 60 * 60), "/"); // Store for 30 days
             }
 
-            // Redirect to the "auth-check.php" for session verification
-            header("Location: index.html");
-            exit;
+              // Role-based redirection logic
+              if ($db_role === "admin") {
+                header("Location: admin_product.html"); // Redirect admin to admin dashboard
+            } elseif ($db_role === "user") {
+                header("Location: user_product.html"); // Redirect normal users to their dashboard
+            } else {
+                header("Location: index.html"); // Default redirection
+            }
         } else {
             echo "<script>alert('Invalid credentials!'); window.history.back();</script>";
         }
