@@ -1113,3 +1113,24 @@ span{
   margin-top: 150px;
   text-align: center;
 }
+
+
+/* logout btn */
+
+.logout-btn {
+  width: auto;
+  height: auto;
+  padding: 8px;
+  background-color: var(--black);
+  font-size: 15px;
+  color: white;
+  border-radius: 24px;
+  border: 1px solid var(--black);
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+
+.logout-btn:hover{
+  background-color: var(--accent);
+  border: 1px solid var(--accent);
+}
