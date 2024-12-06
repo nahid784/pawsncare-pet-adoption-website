@@ -2,36 +2,24 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js" defer></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+        integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
 
-    <head>
-        <meta charset="UTF-8" />
-        <!-- Use for responsiveness -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- link To CSS -->
-        <link rel="stylesheet" href="style.css" />
-        <!-- link To JS -->
-        <script src="index.js" defer></script>
-        <!-- For Scroll Reveal -->
-        <script src="https://unpkg.com/scrollreveal"></script>
-        <!-- For Icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!-- Link For Gsap -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-            integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <!-- Link For Gsap - Scroll Trigger -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-            integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <!-- Link For Lenis - Smooth Scrolling -->
-        <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-        <!-- Link For Split Type -->
-        <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
-
-        <title>Adopt Your Pet</title>
-    </head>
+    <title>Adopt Your Pet</title>
 </head>
 
 <body>
@@ -48,9 +36,8 @@
             <a href="index.html#pets">Pets</a>
             <a href="index.html#requirements">Requirements</a>
             <a href="index.html#about">About</a>
-            <a href="index.html#stories">Stories</a> 
+            <a href="index.html#stories">Stories</a>
         </div>
-        
         <button onclick="logout()" class="logout-btn">Log Out</button>
         <div class="btn">
             <i class="fas fa-bars menu-btn"></i>
@@ -63,12 +50,15 @@
             <h1>Manage Animals</h1>
         </div>
         <?php include 'process_admin_actions.php'; ?>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             <input type="text" name="name" placeholder="Animal Name" required />
             <input type="text" name="animal_type" placeholder="Animal Type" required />
             <input type="text" name="location" placeholder="Location" required />
-            <input type="text" name="contact_no" placeholder="Contact No" required />
-            <input type="text" name="image" placeholder="Image URL" required />
+            <input type="text" name="contact_no" placeholder="Contact No" required /> <br><br>
+            <p> Choose Image</p>
+            <input type="file" name="image_file" accept="image/*" /><br><br>
+            <p> or Paste Image url </p>
+            <input type="text" name="image_url" placeholder="Image URL" />
             <button class="adbtn" type="submit" name="action" value="add">Add Animal</button>
         </form>
 
@@ -78,56 +68,56 @@
         <div class="admin-container">
             <?php include 'fetch_admin_animals.php'; ?>
         </div>
+    </section>
 
-        <!-- Footer Section -->
-        <footer id="footer">
-            <div class="footer-container">
-                <div class="footer-links">
-                    <h2>Quick Links</h2>
-                    <div class="link-container">
-                        <div class="links">
-                            <a href="/">Home</a>
-                            <a href="index.html#about">About</a>
-                            <a href="index.html#pets">Pets</a>
-                        </div>
-                        <div class="links">
-                            <a href="index.html#requirements">Requirements</a>
-                            <a href="index.html#stories">Stories</a>
-                            <a href="index.html#footer">Contact Us</a>
-                        </div>
+    <!-- Footer Section -->
+    <footer id="footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <h2>Quick Links</h2>
+                <div class="link-container">
+                    <div class="links">
+                        <a href="/">Home</a>
+                        <a href="index.html#about">About</a>
+                        <a href="index.html#pets">Pets</a>
                     </div>
-                </div>
-                <div class="footer-brand">
-                    <h1>Paws<b class="accent">&</b>Care</h1>
-                    <p>Find the Companion Who Completes You!</p>
-                    <div class="socials">
-                        <a href="/"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="/"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="/"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-contact-info">
-                    <div class="contact-info-item">
-                        <i class="fa-regular fa-envelope"></i>
-                        <p>paw&care@gmail.com</p>
-                    </div>
-                    <div class="contact-info-item">
-                        <i class="fa-solid fa-phone"></i>
-                        <p>+880 1758 1516 42</p>
+                    <div class="links">
+                        <a href="index.html#requirements">Requirements</a>
+                        <a href="index.html#stories">Stories</a>
+                        <a href="index.html#footer">Contact Us</a>
                     </div>
                 </div>
             </div>
-            <p class="copyright">All Rights Reserved to <b>Paw&Care</b> 2024</p>
-        </footer>
+            <div class="footer-brand">
+                <h1>Paws<b class="accent">&</b>Care</h1>
+                <p>Find the Companion Who Completes You!</p>
+                <div class="socials">
+                    <a href="/"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="/"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="/"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-contact-info">
+                <div class="contact-info-item">
+                    <i class="fa-regular fa-envelope"></i>
+                    <p>paw&care@gmail.com</p>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <p>+880 1758 1516 42</p>
+                </div>
+            </div>
+        </div>
+        <p class="copyright">All Rights Reserved to <b>Paw&Care</b> 2024</p>
+    </footer>
 
-        <script>
-            // Fetch and display animals dynamically
-            async function fetchAnimals() {
-                const response = await fetch('fetch_animals.php');
-                const animals = await response.json();
+    <script>
+        async function fetchAnimals() {
+            const response = await fetch('fetch_animals.php');
+            const animals = await response.json();
 
-                const table = document.getElementById('animal-table');
-                table.innerHTML = animals.map(animal => `
+            const table = document.getElementById('animal-table');
+            table.innerHTML = animals.map(animal => `
                 <tr>
                     <td><img src="${animal.image}" alt="${animal.name}" width="50"></td>
                     <td>${animal.name}</td>
@@ -140,17 +130,15 @@
                     </td>
                 </tr>
             `).join('');
-            }
+        }
 
-            // Log out function
-            function logout() {
-                document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                window.location.href = "auth.html";
-            }
+        function logout() {
+            document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = "auth.html";
+        }
 
-            // Initialize on page load
-            window.onload = fetchAnimals;
-        </script>
+        window.onload = fetchAnimals;
+    </script>
 </body>
 
 </html>

@@ -14,7 +14,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $type = $_POST['animal_type'];
         $location = $_POST['location'];
         $contact = $_POST['contact_no'];
-        $image = $_POST['image'];
+        $image_url = $_POST['image_url'];
+
+        // Handle file upload
+        $image = $image_url; // Default to the URL
+        if (!empty($_FILES['image_file']['name'])) {
+            $target_dir = "uploads/";
+            // Check if the directory exists, if not, create it
+            if (!is_dir($target_dir)) {
+                mkdir($target_dir, 0777, true);
+            }
+            $target_file = $target_dir . basename($_FILES['image_file']['name']);
+            if (move_uploaded_file($_FILES['image_file']['tmp_name'], $target_file)) {
+                $image = $target_file; // Use the uploaded file path
+            } else {
+                echo "Error: There was a problem uploading your file.";
+            }
+        }
 
         $stmt = $mysqli->prepare("INSERT INTO animals (name, animal_type, location, contact_no, image) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sssss", $name, $type, $location, $contact, $image);
@@ -30,7 +46,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $type = $_POST['animal_type'];
         $location = $_POST['location'];
         $contact = $_POST['contact_no'];
-        $image = $_POST['image'];
+        $image_url = $_POST['image_url'];
+
+        // Handle file upload
+        $image = $image_url; // Default to the URL
+        if (!empty($_FILES['image_file']['name'])) {
+            $target_dir = "uploads/";
+            // Check if the directory exists, if not, create it
+            if (!is_dir($target_dir)) {
+                mkdir($target_dir, 0777, true);
+            }
+            $target_file = $target_dir . basename($_FILES['image_file']['name']);
+            if (move_uploaded_file($_FILES['image_file']['tmp_name'], $target_file)) {
+                $image = $target_file; // Use the uploaded file path
+            } else {
+                echo "Error: There was a problem uploading your file.";
+            }
+        }
 
         $stmt = $mysqli->prepare("UPDATE animals SET name = ?, animal_type = ?, location = ?, contact_no = ?, image = ? WHERE id = ?");
         $stmt->bind_param("sssssi", $name, $type, $location, $contact, $image, $id);
