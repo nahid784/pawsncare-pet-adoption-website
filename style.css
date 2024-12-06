@@ -899,14 +899,25 @@ form input[type="submit"]:hover {
 }
 
 .adbtn{
-  background-color: #4caf50;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  background-color: var(--black);
+  font-size: 15px;
   color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
+  border-radius: 24px;
+  border: 1px solid var(--black);
+  transition: all 0.2s ease-out;
   cursor: pointer;
-  font-size: 18px;
 }
+
+.adbtn:hover{
+  background-color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 12px;
+  border-radius: 15px;
+}
+
 
 
 /* auth */
@@ -1133,6 +1144,8 @@ span{
 .logout-btn:hover{
   background-color: var(--accent);
   border: 1px solid var(--accent);
+  padding: 10px;
+  border-radius: 15px;
 }
 
 /* prodcut page */
@@ -1173,4 +1186,54 @@ span{
 
 .product:hover{
   transform: translateY(-10px);
+}
+
+/* admin panel */
+.admin-container{
+  display: grid;
+  grid-template-columns: repeat(4, 250px);
+  gap: 20px;
+  justify-content: center;
+  margin: 20px;
+}
+
+.admin-container img{
+  object-fit: cover;
+  width: 200px;
+  height: 250px;
+  border-radius: 24px;
+  object-position: center center;
+}
+
+.admin-container form{
+  background-color: #d1cfcf62; 
+  border: 1px solid #ddd; 
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  padding: 20px; 
+  width: 100%; 
+  text-align: center; 
+  transition: transform 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.admin-container form button{
+  width: auto;
+  height: auto;
+  padding: 8px;
+  background-color: var(--black);
+  font-size: 15px;
+  color: white;
+  border-radius: 24px;
+  border: 1px solid var(--black);
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+
+}
+
+.admin-container form button:hover{
+  background-color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 10px;
+  border-radius: 15px;
 }
