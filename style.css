@@ -1128,7 +1128,7 @@ span{
 
 /* logout btn */
 
-.logout-btn {
+.logout-btn, .hm{
   width: auto;
   height: auto;
   padding: 8px;
@@ -1141,12 +1141,15 @@ span{
   cursor: pointer;
 }
 
-.logout-btn:hover{
+.logout-btn:hover, .hm:hover{
   background-color: var(--accent);
   border: 1px solid var(--accent);
   padding: 10px;
   border-radius: 15px;
 }
+
+
+
 
 /* prodcut page */
 
