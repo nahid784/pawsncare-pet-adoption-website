@@ -18,6 +18,7 @@ while ($row = $result->fetch_assoc()) : ?>
         <p>Type: <?php echo $row['animal_type']; ?></p>
         <p>Location: <?php echo $row['location']; ?></p>
         <p>Contact: <?php echo $row['contact_no']; ?></p>
+        <p> <button type="submit" name="action" value="adopt">Adopt <?php echo $row['name']; ?></button></p>
     </div>
 <?php endwhile;
 
