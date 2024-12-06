@@ -1217,7 +1217,7 @@ span{
   margin-bottom: 20px;
 }
 
-.admin-container form button{
+.admin-container form button, .product button{
   width: auto;
   height: auto;
   padding: 8px;
@@ -1231,7 +1231,7 @@ span{
 
 }
 
-.admin-container form button:hover{
+.admin-container form button:hover, .product button:hover{
   background-color: var(--accent);
   border: 1px solid var(--accent);
   padding: 10px;
