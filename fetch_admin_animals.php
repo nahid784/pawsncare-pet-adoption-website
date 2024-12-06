@@ -7,6 +7,7 @@ while ($row = $result->fetch_assoc()) : ?>
         <input type="text" name="animal_type" value="<?php echo $row['animal_type']; ?>" />
         <input type="text" name="location" value="<?php echo $row['location']; ?>" />
         <input type="text" name="contact_no" value="<?php echo $row['contact_no']; ?>" />
+        <img src="<?php echo $row['image']; ?>" alt="<?php echo $row['name']; ?>" />
         <input type="text" name="image" value="<?php echo $row['image']; ?>" />
         <button type="submit" name="action" value="update">Update</button>
         <button type="submit" name="action" value="delete">Delete</button>
