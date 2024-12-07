@@ -13,12 +13,7 @@ if ($mysqli->connect_error) {
 $result = $mysqli->query("SELECT * FROM animals");
 while ($row = $result->fetch_assoc()) : ?>
     <div class="product">
-        <img src="<?php echo $row['image']; ?>" alt="<?php echo $row['name']; ?>" />
-        <h2><?php echo $row['name']; ?></h2>
-        <p>Type: <?php echo $row['animal_type']; ?></p>
-        <p>Location: <?php echo $row['location']; ?></p>
-        <p>Contact: <?php echo $row['contact_no']; ?></p>
-        <p><button type="button" onclick="window.location.href='adaption_process.html?animal_id=<?php echo $row['id']; ?>'">Adopt <?php echo $row['name']; ?></button></p>
+        <h2> For <?php echo $row['name']; ?></h2>
     </div>
 <?php endwhile;
 

@@ -1128,7 +1128,7 @@ span{
 
 /* logout btn */
 
-.logout-btn {
+.logout-btn, .hm{
   width: auto;
   height: auto;
   padding: 8px;
@@ -1141,12 +1141,15 @@ span{
   cursor: pointer;
 }
 
-.logout-btn:hover{
+.logout-btn:hover, .hm:hover{
   background-color: var(--accent);
   border: 1px solid var(--accent);
   padding: 10px;
   border-radius: 15px;
 }
+
+
+
 
 /* prodcut page */
 
@@ -1236,4 +1239,60 @@ span{
   border: 1px solid var(--accent);
   padding: 10px;
   border-radius: 15px;
+}
+
+/* adaption process page */
+.main-container{
+  padding: 50px;
+  width: 100%;
+  display: flex;
+  column-gap: 50px;
+  justify-content: space-between;
+}
+
+.pro-container{
+  width: 50%;
+  padding: 30px;
+  border: 1px solid black;
+  background: rgba(20, 20, 20, 0.05); border: 1px solid rgba(255, 255, 255, 0.5);  border-radius: 24px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(15px); text-align: center;
+  
+}
+
+.form-container{
+  align-content: space-evenly;
+  width: 50%;
+  padding: 30px;
+  border: 1px solid black;
+  background: rgba(20, 20, 20, 0.05); border: 1px solid rgba(255, 255, 255, 0.5);  border-radius: 24px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(15px);
+  
+}
+
+.form-container .formc{
+  margin-top: 0px;
+}
+
+.formt{
+  text-align: center;
+}
+
+.pro-container .product{
+  background-color: transparent;
+  border: 0px;
+  border-radius: 12px;
+  box-shadow: none; 
+  padding: 20px; 
+  width: 100%; 
+  text-align: center; 
+  transition: transform 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.pro-container img{
+    object-fit: cover;
+    width: 400px;
+    height: 450px;
+    border-radius: 24px;
+    object-position: center center;
+    margin-bottom: 50px;
+  
 }

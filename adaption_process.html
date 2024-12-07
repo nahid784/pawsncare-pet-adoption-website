@@ -1,0 +1,202 @@
+<?php
+// Start the session
+session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
+    header("Location: auth.html"); // Redirect to login if not logged in
+    exit;
+}
+
+// Connect to the database
+$mysqli = new mysqli("localhost", "root", "", "pet");
+if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
+}
+
+// Fetch the animal ID from query parameters
+$animal_id = isset($_GET['animal_id']) ? intval($_GET['animal_id']) : 0;
+$animal = null;
+
+if ($animal_id > 0) {
+    $stmt = $mysqli->prepare("SELECT * FROM animals WHERE id = ?");
+    $stmt->bind_param("i", $animal_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $animal = $result->fetch_assoc();
+    $stmt->close();
+}
+
+$mysqli->close();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- Use for responsiveness -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- link To CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- link To JS -->
+  <script src="index.js" defer></script>
+  <!-- For Scroll Reveal -->
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <!-- For Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Link For Gsap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Link For Gsap - Scroll Trigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+    integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Link For Lenis - Smooth Scrolling -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <!-- Link For Split Type -->
+  <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
+  <title> Adaption Process</title>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav>
+    <a href="index.html" class="brand">
+      <h1>Paws<b class="accent">&</b>Care</h1>
+    </a>
+    <div class="menu">
+      <div class="btn">
+        <i class="fas fa-times close-btn"></i>
+      </div>
+      <a href="index.html">Home</a>
+      <a href="index.html#pets">Pets</a>
+      <a href="index.html#requirements">Requirements</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#stories">Stories</a>
+    </div>
+    <button onclick="logout()" class="logout-btn">Log Out</button>
+    <div class="btn">
+      <i class="fas fa-bars menu-btn"></i>
+    </div>
+  </nav>
+
+  <main>
+    <div class="formc">
+      <h1>Adoption Process Form</h1>
+    </div> <!-- Container -->
+    <div class="main-container"> <!-- Left Container remains unchanged -->
+      <div class="pro-container">
+        <?php if ($animal): ?>
+        <div class="product"> <img src="<?php echo $animal['image']; ?>" alt="<?php echo $animal['name']; ?>" />
+          <h2>
+            <?php echo $animal['name']; ?>
+          </h2>
+          <p>Type:
+            <?php echo $animal['animal_type']; ?>
+          </p>
+          <p>Location:
+            <?php echo $animal['location']; ?>
+          </p>
+          <p>Contact:
+            <?php echo $animal['contact_no']; ?>
+          </p>
+        </div>
+        <?php else: ?>
+        <p>Animal not found.</p>
+        <?php endif; ?> <button class="hm" onclick="window.location.href='user_product.html'">Go Back</button>
+      </div> <!-- Right Container -->
+      <div class="form-container">
+        <div class="formt">
+          <h2>Fill out this form to adopt
+            <?php echo $animal['name']; ?>
+          </h2>
+        </div>
+        <form id="adoptionForm"> <input type="hidden" name="animal_id" value="<?php echo $animal['id']; ?>"> <input
+            type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>"> <label for="firstname">First
+            Name:</label> <input type="text" id="firstname" name="firstname" required><br> <label for="lastname">Last
+            Name:</label> <input type="text" id="lastname" name="lastname" required><br> <label
+            for="email">Email:</label> <input type="email" id="email" name="email" required><br> <label
+            for="contact_no">Contact no:</label> <input type="text" id="contact_no" name="contact_no" required><br>
+          <label for="location">Location:</label> <input type="text" id="location" name="location" required><br> <br>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+  </main>
+  <!-- Footer Section -->
+  <footer id="footer">
+    <div class="footer-container">
+      <div class="footer-links">
+        <h2>Quick Links</h2>
+        <div class="link-container">
+          <div class="links">
+            <a href="/">Home</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#pets">Pets</a>
+          </div>
+          <div class="links">
+            <a href="index.html#requirements">Requirements</a>
+            <a href="index.html#stories">Stories</a>
+            <a href="index.html#footer">Contact Us</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-brand">
+        <h1>Paws<b class="accent">&</b>Care</h1>
+        <p>Find the Companion Who Completes You!</p>
+        <div class="socials">
+          <a href="/"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="/"><i class="fa-brands fa-twitter"></i></a>
+          <a href="/"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-contact-info">
+        <div class="contact-info-item">
+          <i class="fa-regular fa-envelope"></i>
+          <p>paw&care@gmail.com</p>
+        </div>
+        <div class="contact-info-item">
+          <i class="fa-solid fa-phone"></i>
+          <p>+880 1758 1516 42</p>
+        </div>
+      </div>
+    </div>
+    <p class="copyright">All Rights Reserved to <b>Paw&Care</b> 2024</p>
+  </footer>
+  <!-- Footer Section End-->
+
+  <script>
+    // Function to handle form submission 
+    document.getElementById('adoptionForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const formData = new FormData(this);
+
+      fetch('adoption_request.php', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.text())
+        .then(data => {
+          console.log(data);
+          alert(data);
+          window.location.href = 'user_product.html';
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    });
+
+    function logout() {
+      document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      window.location.href = "auth.html";
+    }
+
+    window.onload = fetchAnimals;
+  </script>
+</body>
+
+</html>

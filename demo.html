@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nested Containers Example</title>
+    <style>
+        .main-container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            display: flex;
+            column-gap: 25px;
+            justify-content: space-between;
+        }
+        .form-container, .product-container {
+            width: 50%;
+            padding: 10px;
+            background-color: #376588;
+            border: 1px solid #999;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="product-container">
+        <h2>Child Container 1</h2>
+        <p>This is the first child container.</p>
+    </div>
+    <div class="form-container">
+        <h2>Child Container 2</h2>
+        <p>This is the second child container.</p>
+    </div>
+</div>
+
+</body>
+</html>
