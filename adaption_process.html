@@ -1,3 +1,35 @@
+<?php
+// Start the session
+session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
+    header("Location: auth.html"); // Redirect to login if not logged in
+    exit;
+}
+
+// Connect to the database
+$mysqli = new mysqli("localhost", "root", "", "pet");
+if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
+}
+
+// Fetch the animal ID from query parameters
+$animal_id = isset($_GET['animal_id']) ? intval($_GET['animal_id']) : 0;
+$animal = null;
+
+if ($animal_id > 0) {
+    $stmt = $mysqli->prepare("SELECT * FROM animals WHERE id = ?");
+    $stmt->bind_param("i", $animal_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $animal = $result->fetch_assoc();
+    $stmt->close();
+}
+
+$mysqli->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,36 +86,46 @@
 
   <main>
     <div class="formc">
-      <h1>Adaption Process Form</h1>
-    </div>
-    <!-- coontainer -->
-    <div class="main-container">
+      <h1>Adoption Process Form</h1>
+    </div> <!-- Container -->
+    <div class="main-container"> <!-- Left Container remains unchanged -->
       <div class="pro-container">
-        <?php include 'adaption.php'; ?>
-        <button class="hm" onclick="window.location.href='user_product.html'"> Go to Home </button>
-      </div>
+        <?php if ($animal): ?>
+        <div class="product"> <img src="<?php echo $animal['image']; ?>" alt="<?php echo $animal['name']; ?>" />
+          <h2>
+            <?php echo $animal['name']; ?>
+          </h2>
+          <p>Type:
+            <?php echo $animal['animal_type']; ?>
+          </p>
+          <p>Location:
+            <?php echo $animal['location']; ?>
+          </p>
+          <p>Contact:
+            <?php echo $animal['contact_no']; ?>
+          </p>
+        </div>
+        <?php else: ?>
+        <p>Animal not found.</p>
+        <?php endif; ?> <button class="hm" onclick="window.location.href='user_product.html'">Go Back</button>
+      </div> <!-- Right Container -->
       <div class="form-container">
         <div class="formt">
-          <h2> Fill out this form </h2>
+          <h2>Fill out this form to adopt
+            <?php echo $animal['name']; ?>
+          </h2>
         </div>
-        <form id="contactForm" action="contact.php" method="post">
-          <label for="firstname">First Name:</label>
-          <input type="text" id="firstname" name="firstname" required><br>
-          <label for="lastname">Last Name:</label>
-          <input type="text" id="lastname" name="lastname" required><br>
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required><br>
-          <label for="email">Contact no:</label>
-          <input type="email" id="email" name="email" required><br>
-          <label for="email">Location</label>
-          <input type="email" id="email" name="email" required><br>
-          <br>
+        <form id="adoptionForm"> <input type="hidden" name="animal_id" value="<?php echo $animal['id']; ?>"> <input
+            type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>"> <label for="firstname">First
+            Name:</label> <input type="text" id="firstname" name="firstname" required><br> <label for="lastname">Last
+            Name:</label> <input type="text" id="lastname" name="lastname" required><br> <label
+            for="email">Email:</label> <input type="email" id="email" name="email" required><br> <label
+            for="contact_no">Contact no:</label> <input type="text" id="contact_no" name="contact_no" required><br>
+          <label for="location">Location:</label> <input type="text" id="location" name="location" required><br> <br>
           <input type="submit" value="Submit">
         </form>
       </div>
-
     </div>
-    <!-- Contact Form Section -->
   </main>
   <!-- Footer Section -->
   <footer id="footer">
@@ -128,6 +170,25 @@
   <!-- Footer Section End-->
 
   <script>
+    // Function to handle form submission 
+    document.getElementById('adoptionForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const formData = new FormData(this);
+
+      fetch('adoption_request.php', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.text())
+        .then(data => {
+          console.log(data);
+          alert(data);
+          window.location.href = 'user_product.html';
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    });
 
     function logout() {
       document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
