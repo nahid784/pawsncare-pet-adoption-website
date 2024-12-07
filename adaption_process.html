@@ -51,30 +51,40 @@
       <i class="fas fa-bars menu-btn"></i>
     </div>
   </nav>
-  <!-- Contact Form Section -->
+
   <main>
     <div class="formc">
       <h1>Adaption Process Form</h1>
     </div>
-    <!-- <?php include 'adaption.php'; ?> -->
-    <form id="contactForm" action="contact.php" method="post">
-      <label for="firstname">First Name:</label>
-      <input type="text" id="firstname" name="firstname" required><br>
-      <label for="lastname">Last Name:</label>
-      <input type="text" id="lastname" name="lastname" required><br>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required><br>
-      <label for="email">Contact no:</label>
-      <input type="email" id="email" name="email" required><br>
-      <label for="email">Location</label>
-      <input type="email" id="email" name="email" required><br>
-      <br>
-      <input type="submit" value="Submit">
-    </form>
+    <!-- coontainer -->
+    <div class="main-container">
+      <div class="pro-container">
+        <?php include 'adaption.php'; ?>
+        <button class="hm" onclick="window.location.href='user_product.html'"> Go to Home </button>
+      </div>
+      <div class="form-container">
+        <div class="formt">
+          <h2> Fill out this form </h2>
+        </div>
+        <form id="contactForm" action="contact.php" method="post">
+          <label for="firstname">First Name:</label>
+          <input type="text" id="firstname" name="firstname" required><br>
+          <label for="lastname">Last Name:</label>
+          <input type="text" id="lastname" name="lastname" required><br>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required><br>
+          <label for="email">Contact no:</label>
+          <input type="email" id="email" name="email" required><br>
+          <label for="email">Location</label>
+          <input type="email" id="email" name="email" required><br>
+          <br>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+
+    </div>
+    <!-- Contact Form Section -->
   </main>
-
-  <button class="hm" onclick="window.location.href='user_product.html'"> Go to Home </button>
-
   <!-- Footer Section -->
   <footer id="footer">
     <div class="footer-container">
