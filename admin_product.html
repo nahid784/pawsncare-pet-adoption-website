@@ -16,6 +16,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
         integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
 
@@ -62,62 +64,87 @@
             <button class="adbtn" type="submit" name="action" value="add">Add Animal</button>
         </form>
 
-        <div class="pad">
-            <h2>Current Animals</h2>
-        </div>
-        <div class="admin-container">
-            <?php include 'fetch_admin_animals.php'; ?>
-        </div>
-    </section>
+        <section id="admin-panel">
+            <div class="pad">
+                <h1>Manage Animals</h1>
+            </div>
 
-    <!-- Footer Section -->
-    <footer id="footer">
-        <div class="footer-container">
-            <div class="footer-links">
-                <h2>Quick Links</h2>
-                <div class="link-container">
-                    <div class="links">
-                        <a href="/">Home</a>
-                        <a href="index.html#about">About</a>
-                        <a href="index.html#pets">Pets</a>
+            <!-- Search Form with Keyword Suggestions -->
+            <form method="GET" action="admin_product.html">
+                <input type="text" id="search" name="search" placeholder="Search by Name, Type, or ID"
+                    autocomplete="off" />
+                <div id="suggestions" style="display: none;"></div> <!-- Suggestions Box -->
+                <button type="submit">Search</button>
+            </form>
+
+            <!-- Admin Table with Search Results -->
+            <div class="admin-container">
+                <?php while ($row = $result->fetch_assoc()) : ?>
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>" />
+                    <input type="text" name="name" value="<?php echo $row['name']; ?>" />
+                    <input type="text" name="animal_type" value="<?php echo $row['animal_type']; ?>" />
+                    <input type="text" name="location" value="<?php echo $row['location']; ?>" />
+                    <input type="text" name="contact_no" value="<?php echo $row['contact_no']; ?>" />
+                    <img src="<?php echo $row['image']; ?>" alt="<?php echo $row['name']; ?>" />
+                    <input type="file" name="image_file" accept="image/*" />
+                    <input type="text" name="image_url" placeholder="Image URL" value="<?php echo $row['image']; ?>" />
+                    <button type="submit" name="action" value="update">Update</button>
+                    <button type="submit" name="action" value="delete">Delete</button>
+                </form>
+                <?php endwhile; ?>
+            </div>
+
+        </section>
+
+        <!-- Footer Section -->
+        <footer id="footer">
+            <div class="footer-container">
+                <div class="footer-links">
+                    <h2>Quick Links</h2>
+                    <div class="link-container">
+                        <div class="links">
+                            <a href="/">Home</a>
+                            <a href="index.html#about">About</a>
+                            <a href="index.html#pets">Pets</a>
+                        </div>
+                        <div class="links">
+                            <a href="index.html#requirements">Requirements</a>
+                            <a href="index.html#stories">Stories</a>
+                            <a href="index.html#footer">Contact Us</a>
+                        </div>
                     </div>
-                    <div class="links">
-                        <a href="index.html#requirements">Requirements</a>
-                        <a href="index.html#stories">Stories</a>
-                        <a href="index.html#footer">Contact Us</a>
+                </div>
+                <div class="footer-brand">
+                    <h1>Paws<b class="accent">&</b>Care</h1>
+                    <p>Find the Companion Who Completes You!</p>
+                    <div class="socials">
+                        <a href="/"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="/"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="/"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-contact-info">
+                    <div class="contact-info-item">
+                        <i class="fa-regular fa-envelope"></i>
+                        <p>paw&care@gmail.com</p>
+                    </div>
+                    <div class="contact-info-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <p>+880 1758 1516 42</p>
                     </div>
                 </div>
             </div>
-            <div class="footer-brand">
-                <h1>Paws<b class="accent">&</b>Care</h1>
-                <p>Find the Companion Who Completes You!</p>
-                <div class="socials">
-                    <a href="/"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="/"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="/"><i class="fa-brands fa-linkedin-in"></i></a>
-                </div>
-            </div>
-            <div class="footer-contact-info">
-                <div class="contact-info-item">
-                    <i class="fa-regular fa-envelope"></i>
-                    <p>paw&care@gmail.com</p>
-                </div>
-                <div class="contact-info-item">
-                    <i class="fa-solid fa-phone"></i>
-                    <p>+880 1758 1516 42</p>
-                </div>
-            </div>
-        </div>
-        <p class="copyright">All Rights Reserved to <b>Paw&Care</b> 2024</p>
-    </footer>
+            <p class="copyright">All Rights Reserved to <b>Paw&Care</b> 2024</p>
+        </footer>
 
-    <script>
-        async function fetchAnimals() {
-            const response = await fetch('fetch_animals.php');
-            const animals = await response.json();
+        <script>
+            async function fetchAnimals() {
+                const response = await fetch('fetch_animals.php');
+                const animals = await response.json();
 
-            const table = document.getElementById('animal-table');
-            table.innerHTML = animals.map(animal => `
+                const table = document.getElementById('animal-table');
+                table.innerHTML = animals.map(animal => `
                 <tr>
                     <td><img src="${animal.image}" alt="${animal.name}" width="50"></td>
                     <td>${animal.name}</td>
@@ -130,15 +157,47 @@
                     </td>
                 </tr>
             `).join('');
-        }
+            }
 
-        function logout() {
-            document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            window.location.href = "auth.html";
-        }
+            $(document).ready(function () {
+                // When the user types into the search box
+                $('#search').on('keyup', function () {
+                    var query = $(this).val(); // Get the current input value
 
-        window.onload = fetchAnimals;
-    </script>
+                    // Only perform a search if there are at least 2 characters
+                    if (query.length >= 2) {
+                        $.ajax({
+                            url: 'get_keywords.php', // PHP file to get suggestions
+                            method: 'GET',
+                            data: { search_query: query },
+                            success: function (data) {
+                                $('#suggestions').html(data).show(); // Show suggestions
+                            }
+                        });
+                    } else {
+                        $('#suggestions').hide(); // Hide suggestions if input is too short
+                    }
+                });
+
+                // When a suggestion is clicked, fill the search box with the suggestion
+                $(document).on('click', '.suggestion', function () {
+                    var suggestion = $(this).text();
+                    $('#search').val(suggestion); // Set the search box value to the suggestion
+                    $('#suggestions').hide(); // Hide the suggestions after selection
+                });
+            });
+
+
+
+
+
+            function logout() {
+                document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                window.location.href = "auth.html";
+            }
+
+            window.onload = fetchAnimals;
+        </script>
 </body>
 
 </html>
