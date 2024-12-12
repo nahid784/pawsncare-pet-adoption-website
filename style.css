@@ -1296,3 +1296,28 @@ span{
     margin-bottom: 50px;
   
 }
+
+
+/* styleing for search */
+
+#suggestions {
+  border: 1px solid #ddd;
+  max-height: 200px;
+  background-color: #fff;
+  position: absolute;
+  border-radius: 24px;
+  padding: 5px;
+  width: 40%;
+  z-index: 999;
+}
+
+.suggestion {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestion:hover {
+  background-color: #8b8b8b27;
+  border-radius: 24px;
+
+}
