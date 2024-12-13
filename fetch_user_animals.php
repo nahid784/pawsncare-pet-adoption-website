@@ -32,7 +32,7 @@ while ($row = $result->fetch_assoc()) : ?>
         <p>Contact: <?php echo $row['contact_no']; ?></p>
         <p><b>Adoption Status:</b> <?php echo $row['adoption_status']; ?></p>
         <p><b>Applications:</b> <?php echo $row['adoption_count']; ?></p>
-        <p><button type="button" onclick="window.location.href='adoption_process.html?animal_id=<?php echo $row['animal_id']; ?>'">Adopt <?php echo $row['name']; ?></button></p>
+        <p><button type="button" onclick="window.location.href='adaption_process.html?animal_id=<?php echo $row['animal_id']; ?>'">Adopt <?php echo $row['name']; ?></button></p>
     </div>
 <?php endwhile;
 
