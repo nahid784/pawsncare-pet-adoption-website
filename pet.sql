@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2024 at 06:59 PM
+-- Generation Time: Dec 13, 2024 at 07:26 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -49,8 +49,7 @@ INSERT INTO `adoption_requests` (`id`, `user_id`, `animal_id`, `firstname`, `las
 (2, 0, 8, 'asdsa', 'asdas', 'asdi@gmail.com', '5615', 'Jessore', '2024-12-07 15:18:12', 'pending'),
 (3, 0, 6, 'asdasd', 'asdsa', 'dkakach@gmail.com', '0151656', 'Gazipur', '2024-12-07 15:18:57', 'pending'),
 (4, 0, 13, 'nahid', 'Chowdhury', 'nahidhasantusher784@gmail.com', '0151656', 'Gazipur', '2024-12-07 15:19:46', 'pending'),
-(5, 0, 8, 'kazi zakiul', 'abir', 'macalexis999@gmail.com', '01565', 'mirpur', '2024-12-07 15:42:10', 'approved'),
-(6, 0, 9, 'adad', 'add', 'dkakach@gmail.com', '0151656', 'ad', '2024-12-13 10:46:02', 'approved');
+(5, 0, 8, 'kazi zakiul', 'abir', 'macalexis999@gmail.com', '01565', 'mirpur', '2024-12-07 15:42:10', 'approved');
 
 -- --------------------------------------------------------
 
@@ -170,7 +169,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `adoption_requests`
 --
 ALTER TABLE `adoption_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `animals`
