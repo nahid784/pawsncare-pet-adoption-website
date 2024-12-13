@@ -44,7 +44,9 @@ $mysqli->close();
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="pad">
     <h1>Pending Adoption Requests</h1>
+</div>
 
     <!-- Display the adoption requests -->
     <table>
@@ -69,7 +71,7 @@ $mysqli->close();
                     <td>
                         <form action="approve_adoption.php" method="POST">
                             <input type="hidden" name="adoption_id" value="<?php echo $request['id']; ?>">
-                            <button type="submit" name="approve">Approve</button>
+                            <button class="adbtn" type="submit" name="approve">Approve</button>
                         </form>
                     </td>
                 </tr>
