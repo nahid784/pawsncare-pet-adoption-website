@@ -6,9 +6,15 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 }
 
 $mysqli = new mysqli("localhost", "root", "", "pet");
+
+// Get search query if any
+$search = $_GET['search'] ?? ''; // Default to empty if not set
+
+// Handle actions: add, update, delete
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
 
+    // Add animal action
     if ($action === 'add') {
         $name = $_POST['name'];
         $type = $_POST['animal_type'];
@@ -20,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $image = $image_url; // Default to the URL
         if (!empty($_FILES['image_file']['name'])) {
             $target_dir = "uploads/";
-            // Check if the directory exists, if not, create it
             if (!is_dir($target_dir)) {
                 mkdir($target_dir, 0777, true);
             }
@@ -35,12 +40,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $mysqli->prepare("INSERT INTO animals (name, animal_type, location, contact_no, image) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sssss", $name, $type, $location, $contact, $image);
         $stmt->execute();
-    } elseif ($action === 'delete') {
+    }
+
+    // Delete animal action
+    elseif ($action === 'delete') {
         $id = $_POST['id'];
         $stmt = $mysqli->prepare("DELETE FROM animals WHERE id = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
-    } elseif ($action === 'update') {
+    }
+
+    // Update animal action
+    elseif ($action === 'update') {
         $id = $_POST['id'];
         $name = $_POST['name'];
         $type = $_POST['animal_type'];
@@ -52,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $image = $image_url; // Default to the URL
         if (!empty($_FILES['image_file']['name'])) {
             $target_dir = "uploads/";
-            // Check if the directory exists, if not, create it
             if (!is_dir($target_dir)) {
                 mkdir($target_dir, 0777, true);
             }
@@ -69,4 +79,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
     }
 }
+
+// Search Query
+$query = "SELECT * FROM animals";
+if ($search) {
+    $search = "%" . $search . "%"; // Add wildcards for partial matches
+    $query .= " WHERE name LIKE ? OR animal_type LIKE ? OR id LIKE ?";
+}
+
+$stmt = $mysqli->prepare($query);
+if ($search) {
+    $stmt->bind_param("sss", $search, $search, $search);
+}
+$stmt->execute();
+$result = $stmt->get_result();
 ?>
