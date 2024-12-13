@@ -1327,20 +1327,26 @@ span{
 
 /* General table styling */
 table {
-  width: 100%;
+  width: auto;
   border-collapse: collapse;
-  margin: 20px 0;
+  margin: 20px;
   font-size: 16px;
+  margin-left: 20%; 
+}
+
+table form{
+  background-color: transparent;
+  box-shadow: none;
 }
 
 th, td {
-  padding: 12px;
-  text-align: left;
+  padding: 5px;
+  text-align: center;
   border: 1px solid #ddd;
 }
 
 th {
-  background-color: #4CAF50;
+  background-color: #ff9a24;
   color: white;
 }
 
@@ -1361,7 +1367,7 @@ tr:hover td {
 button.approve-btn {
   padding: 8px 16px;
   background-color: #4CAF50;
-  color: white;
+  color: rgb(204, 22, 22);
   border: none;
   cursor: pointer;
   font-size: 14px;
@@ -1388,3 +1394,5 @@ table.adoption-status-table th {
 table.adoption-table .approve-btn {
   margin: 5px;
 }
+
+
