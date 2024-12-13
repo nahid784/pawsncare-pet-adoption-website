@@ -1,6 +1,11 @@
 <?php
-session_start();
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
+// Start the session only if it's not already started
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Check if the user is logged in and is an admin
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header("Location: auth.html");
     exit;
 }
@@ -21,7 +26,7 @@ $contact_no = $mysqli->real_escape_string($_POST['contact_no']);
 $location = $mysqli->real_escape_string($_POST['location']);
 
 // Insert adoption request into the database
-$stmt = $mysqli->prepare("INSERT INTO adoption_requests (user_id, animal_id, firstname, lastname, email, contact_no, location) VALUES (?, ?, ?, ?, ?, ?, ?)");
+$stmt = $mysqli->prepare("INSERT INTO adoption_requests (user_id, animal_id, firstname, lastname, email, contact_no, location, approval_status) VALUES (?, ?, ?, ?, ?, ?, ?, 'pending')");
 $stmt->bind_param("iisssss", $user_id, $animal_id, $firstname, $lastname, $email, $contact_no, $location);
 
 if ($stmt->execute()) {

@@ -71,10 +71,10 @@
 
             <!-- Search Form with Keyword Suggestions -->
             <form method="GET" action="admin_product.html">
-                <input type="text" id="search" name="search" placeholder="Search by Name, Type, or ID"
+                <input type="text" id="search" name="search" placeholder="Search Pet by Name, Type"
                     autocomplete="off" />
                 <div id="suggestions" style="display: none;"></div> <!-- Suggestions Box -->
-                <button type="submit">Search</button>
+                <button class="adbtn" type="submit">Search</button>
             </form>
 
             <!-- Admin Table with Search Results -->
@@ -94,6 +94,11 @@
                 </form>
                 <?php endwhile; ?>
             </div>
+
+            <div class="adoption-requests">
+                <?php include 'admin_adoptions.php'; ?>
+            </div>
+            
 
         </section>
 
@@ -159,6 +164,7 @@
             `).join('');
             }
 
+            // seach functionality
             $(document).ready(function () {
                 // When the user types into the search box
                 $('#search').on('keyup', function () {
