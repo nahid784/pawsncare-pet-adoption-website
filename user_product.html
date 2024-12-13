@@ -51,37 +51,6 @@
             <?php include 'fetch_user_animals.php'; ?>
         </div>
     </main>
-    <div class="animal-status">
-        <?php include 'user_animal_status.php'; ?>
-    </div>
-    <table class="adoption-status-table">
-        <thead>
-            <tr>
-                <th>Animal Name</th>
-                <th>Adoption Status</th>
-                <th>Number of Applications</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            // Fetch all animals and check adoption status
-            $mysqli = new mysqli("localhost", "root", "", "pet");
-            $animals = $mysqli->query("SELECT * FROM animals");
-            while ($animal = $animals->fetch_assoc()) {
-                $status = isset($adoptionStatus[$animal['id']]) ? $adoptionStatus[$animal['id']] : null;
-                $adoptionCount = $status ? $status['adoption_count'] : 0;
-                $adoptionMessage = ($status && $status['adoption_status'] === 'pending') ? 'Adoption Ongoing' : 'No Adoption Ongoing';
-                echo "<tr>
-                        <td>" . htmlspecialchars($animal['name']) . "</td>
-                        <td>" . $adoptionMessage . "</td>
-                        <td>" . $adoptionCount . "</td>
-                      </tr>";
-            }
-            $mysqli->close();
-            ?>
-        </tbody>
-    </table>
-
     <!-- Footer Section -->
     <footer id="footer">
         <div class="footer-container">
@@ -125,20 +94,24 @@
 
     <script>
         async function fetchAnimals() {
-            const response = await fetch('fetch_animals.php');
+            const response = await fetch('fetch_user_animal.php');
             const animals = await response.json();
 
             const container = document.querySelector('.product-container');
             container.innerHTML = animals.map(animal => `
-                <div class="product-card">
-                    <img src="${animal.image}" alt="${animal.name}" class="product-image">
-                    <h3 class="product-name">${animal.name}</h3>
-                    <p class="product-type"><b>Type:</b> ${animal.type}</p>
-                    <p class="product-location"><b>Location:</b> ${animal.location}</p>
-                    <p class="product-contact"><b>Contact:</b> ${animal.contact}</p>
-                </div>
-            `).join('');
+        <div class="product-card">
+            <img src="${animal.image}" alt="${animal.name}" class="product-image">
+            <h3 class="product-name">${animal.name}</h3>
+            <p class="product-type"><b>Type:</b> ${animal.animal_type}</p>
+            <p class="product-location"><b>Location:</b> ${animal.location}</p>
+            <p class="product-contact"><b>Contact:</b> ${animal.contact_no}</p>
+            <p class="product-adoption-status"><b>Adoption Status:</b> ${animal.adoption_status}</p>
+            <p class="product-adoption-count"><b>Applications:</b> ${animal.adoption_count}</p>
+        </div>
+    `).join('');
         }
+
+        window.onload = fetchAnimals;
 
         function logout() {
             document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
