@@ -20,30 +20,4 @@ $mysqli->close();
 ?>
 
 <!-- HTML code to display the adoption status for each animal -->
-<table>
-    <thead>
-        <tr>
-            <th>Animal Name</th>
-            <th>Adoption Status</th>
-            <th>Number of Applications</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        // Fetch all animals and check adoption status
-        $mysqli = new mysqli("localhost", "root", "", "pet");
-        $animals = $mysqli->query("SELECT * FROM animals");
-        while ($animal = $animals->fetch_assoc()) {
-            $status = isset($adoptionStatus[$animal['id']]) ? $adoptionStatus[$animal['id']] : null;
-            $adoptionCount = $status ? $status['adoption_count'] : 0;
-            $adoptionMessage = ($status && $status['adoption_status'] === 'pending') ? 'Adoption Ongoing' : 'No Adoption Ongoing';
-            echo "<tr>
-                    <td>" . htmlspecialchars($animal['name']) . "</td>
-                    <td>" . $adoptionMessage . "</td>
-                    <td>" . $adoptionCount . "</td>
-                  </tr>";
-        }
-        $mysqli->close();
-        ?>
-    </tbody>
-</table>
+
