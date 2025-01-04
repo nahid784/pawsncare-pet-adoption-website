@@ -1,0 +1,5 @@
+1. First Open xampp & Start Apache and MySQL service
+2. Go to localhost/phpmyadmin
+3. Create a database named "pet"
+4. Under "pet" database import the following database tables from backup into the created database.
+5.
