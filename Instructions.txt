@@ -2,4 +2,6 @@
 2. Go to localhost/phpmyadmin
 3. Create a database named "pet"
 4. Under "pet" database import the following database tables from backup into the created database.
-5.
+5. Copy the whole project folder and paste it to xampp/htdocs folder
+6. Rename the folder according to you
+7. Enter localhost/"your-folder-name" on any browser for going live on local server.
