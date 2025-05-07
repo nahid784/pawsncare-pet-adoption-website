@@ -4,9 +4,8 @@ Paws & Care is a Pet Adoption and Care platform built with HTML, CSS, JavaScript
 
 # ⚠️ Note on Backend Requirements
 
-```
 This project includes a PHP and MySQL backend, which means it is not fully functional by simply opening the files in a browser. To run this project properly and enable dynamic features (such as form submissions, login systems, database interactions, etc.), you need a local server environment or a live web hosting server that supports PHP and MySQL.
-```
+
 
 # ✅ How to Run Locally
 
